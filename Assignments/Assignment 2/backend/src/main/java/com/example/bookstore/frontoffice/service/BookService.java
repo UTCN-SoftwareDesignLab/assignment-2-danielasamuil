@@ -2,6 +2,7 @@ package com.example.bookstore.frontoffice.service;
 
 import com.example.bookstore.frontoffice.mapper.BookMapper;
 import com.example.bookstore.frontoffice.model.Book;
+import com.example.bookstore.frontoffice.model.BookSpecification;
 import com.example.bookstore.frontoffice.model.dto.BookDTO;
 import com.example.bookstore.frontoffice.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,7 @@ public class BookService {
 
     public List<BookDTO> findByNameOrAuthorOrGenre(String input) {
 
-        return bookRepository.findByNameOrAuthorOrGenre(input).stream().
+        return bookRepository.findAll(BookSpecification.similarAuthors(input).or(BookSpecification.similarTitles(input)).or(BookSpecification.similarGenres(input))).stream().
                 map(bookMapper::bookToDto)
                 .collect(Collectors.toList());
     }

@@ -35,9 +35,17 @@ public class PdfReportService implements ReportService {
 
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
             contentStream.beginText();
-            contentStream.setFont(PDType1Font.COURIER, 10);
+            contentStream.setFont(PDType1Font.COURIER_BOLD_OBLIQUE, 20);
+            contentStream.newLineAtOffset(-200, -100);
+            contentStream.newLineAtOffset(300, 800);
+            contentStream.setLeading(20);
+            contentStream.showText("LIST OF BOOKS OUT OF STOCK");
+            contentStream.newLine();
+            contentStream.newLine();
 
             for (BookDTO book : books) {
+
+                contentStream.setFont(PDType1Font.COURIER, 10);
 
                 contentStream.showText("id: " + book.getId());
                 contentStream.newLine();
@@ -55,7 +63,7 @@ public class PdfReportService implements ReportService {
             contentStream.endText();
             contentStream.close();
 
-            document.save("C:\\Users\\samui\\OneDrive\\Desktop\\year 3, sem 2\\DS\\Lab-Assignments\\assignment-2-danielasamuil\\Assignments\\Assignment 2\\backend\\OutOfStockBooks.pdf");
+            document.save("OutOfStockBooks.pdf");
             document.close();
 
         } catch (IOException e) {

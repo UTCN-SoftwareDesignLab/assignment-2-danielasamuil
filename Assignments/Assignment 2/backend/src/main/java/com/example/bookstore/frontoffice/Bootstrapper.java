@@ -1,5 +1,6 @@
 package com.example.bookstore.frontoffice;
 
+import com.example.bookstore.frontoffice.model.Book;
 import com.example.bookstore.frontoffice.repository.BookRepository;
 import com.example.bookstore.frontoffice.security.AuthService;
 import com.example.bookstore.frontoffice.security.dto.SignupRequest;
@@ -44,17 +45,36 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
                 );
             }
             authService.register(SignupRequest.builder()
-                    .email("samuildaniela@yahoo.com")
-                    .username("daniela")
-                    .password("Password1")
+                    .email("alex@email.com")
+                    .username("alex")
+                    .password("WooHoo1!")
                     .roles(Set.of("ADMIN"))
                     .build());
             authService.register(SignupRequest.builder()
-                    .email("samuildaniela1@yahoo.com")
-                    .username("daniela1")
-                    .password("Password2")
+                    .email("alex1@email.com")
+                    .username("alex1")
+                    .password("WooHoo1!")
                     .roles(Set.of("USER"))
                     .build());
+
+            Book b = Book.builder()
+                    .name("Title1")
+                    .author("Author1")
+                    .genre("Genre1")
+                    .price(10)
+                    .quantity(0)
+                    .build();
+
+            Book b1 = Book.builder()
+                    .name("Title2")
+                    .author("Author1")
+                    .genre("Genre2")
+                    .price(30)
+                    .quantity(0)
+                    .build();
+
+            bookRepository.save(b);
+            bookRepository.save(b1);
         }
     }
 }

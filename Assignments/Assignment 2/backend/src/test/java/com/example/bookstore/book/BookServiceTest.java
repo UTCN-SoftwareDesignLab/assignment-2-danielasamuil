@@ -3,6 +3,7 @@ package com.example.bookstore.book;
 import com.example.bookstore.TestCreationFactory;
 import com.example.bookstore.frontoffice.mapper.BookMapper;
 import com.example.bookstore.frontoffice.model.Book;
+import com.example.bookstore.frontoffice.model.BookSpecification;
 import com.example.bookstore.frontoffice.model.dto.BookDTO;
 import com.example.bookstore.frontoffice.repository.BookRepository;
 import com.example.bookstore.frontoffice.service.BookService;
@@ -16,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.when;
 
@@ -67,23 +69,19 @@ class BookServiceTest {
                 .genre("Genre3")
                 .build();
 
-        bookRepository.save(book1);
-        bookRepository.save(book2);
-        bookRepository.save(book3);
+        List<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book3);
 
-        bookService.create(bookMapper.bookToDto(book1));
-        bookService.create(bookMapper.bookToDto(book2));
-        bookService.create(bookMapper.bookToDto(book3));
+        String input = "%Author1";
 
-        List<BookDTO> books = bookService.findByNameOrAuthorOrGenre("Name1");
-        System.out.println(books);
+        when(bookRepository.findAll(BookSpecification.similarAuthors(input).or(BookSpecification.similarTitles(input)).or(BookSpecification.similarGenres(input)))).thenReturn(books);
 
-        //Assertions.assertEquals(1, bookService.findByNameOrAuthorOrGenre("Name1").size());
+       // Assertions.assertEquals(books.size(), bookService.findByNameOrAuthorOrGenre(input).size());
     }
 
     @Test
     void deleteAll() {
-        List<Book> books = TestCreationFactory.listOf(Book.class);
         bookRepository.deleteAll();
 
         List<BookDTO> all = bookService.findAll();
@@ -147,36 +145,26 @@ class BookServiceTest {
         when(bookMapper.bookToDto(book2)).thenReturn(book);
         when(bookRepository.save(book2)).thenReturn(book2);
 
-        Assertions.assertEquals(book.getId(), bookService.create(book).getId());
+        Assertions.assertEquals(book.getName(), bookService.create(book).getName());
     }
 
-    //Not working yet
-    /*
     @Test
     public void sellBook(){
 
-        BookDTO book2 = BookDTO.builder()
+        Book book2 = Book.builder()
                 .name("Name1")
                 .author("Author1")
                 .price(10)
                 .quantity(2)
                 .build();
 
-        bookRepository.save(bookMapper.fromDto(book2));
+        when(bookRepository.findById(book2.getId())).thenReturn(Optional.of(book2));
+
         Assertions.assertTrue(bookService.sell(book2.getId()));
-    } */
+    }
 
     @Test()
     public void findOutOfStock() {
-        Book book2 = Book.builder()
-                .name("Name1")
-                .author("Author1")
-                .price(10)
-                .build();
-
-        List<Book> books = new ArrayList<Book>();
-        books.add(book2);
-
         List<BookDTO> booksOutOfStock = bookService.findOutOfStock();
         Assertions.assertNotNull(booksOutOfStock);
     }

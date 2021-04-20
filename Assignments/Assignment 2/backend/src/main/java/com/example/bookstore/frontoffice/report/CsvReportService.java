@@ -24,7 +24,7 @@ public class CsvReportService implements ReportService {
 
             List<BookDTO> books = bookService.findOutOfStock();
 
-            FileWriter fileWriter = null;
+            FileWriter fileWriter;
             fileWriter = new FileWriter("OutOfStockBooks.csv");
             fileWriter.append("id, title, author, genre, price");
             fileWriter.append("\n");
@@ -50,7 +50,6 @@ public class CsvReportService implements ReportService {
             e.printStackTrace();
         }
         return "CSV!";
-
     }
 
     @Override
