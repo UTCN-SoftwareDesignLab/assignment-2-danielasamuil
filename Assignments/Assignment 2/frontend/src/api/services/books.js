@@ -15,17 +15,15 @@ export default {
             }
         );
     },
-    edit(id, book) {
-        console.log("id: " + id)
-        return HTTP.put(BASE_URL + "/books/" + id, book, {headers: authHeader()}).then(
+    edit(book) {
+        return HTTP.put(BASE_URL + "/books/" + book.id, book, {headers: authHeader()}).then(
             (response) => {
                 return response.data;
             }
         );
     },
-    delete(id) {
-        console.log("id: " + id)
-        return HTTP.delete(BASE_URL + "/books/" + id, {headers: authHeader()}).then(
+    delete(book) {
+        return HTTP.delete(BASE_URL + "/books/" + book.id, {headers: authHeader()}).then(
             () => {
                 return true;
             }
@@ -52,9 +50,8 @@ export default {
             }
         );
     },
-    sell(id) {
-        console.log("id: " + id)
-        return HTTP.patch(BASE_URL + "/books/", id, {
+    sell(book) {
+        return HTTP.patch(BASE_URL + "/books/", book.id, {
             headers: authHeader(),
         }).then((response) => {
             return response.data;
