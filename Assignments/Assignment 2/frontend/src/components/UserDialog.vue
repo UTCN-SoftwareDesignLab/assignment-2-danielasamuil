@@ -7,7 +7,7 @@
     <template>
       <v-card>
         <v-toolbar color="primary" dark>
-          {{ "Create user"}}
+          {{"Create user"}}
         </v-toolbar>
         <v-form>
           <v-text-field v-model="user.username" label="Username"/>
@@ -15,7 +15,7 @@
           <v-text-field type="password" v-model="user.password" label="Password"/>
         </v-form>
         <v-card-actions>
-          <v-btn @click="persist">
+          <v-btn @click="createUser">
             {{"Create"}}
           </v-btn>
           <v-btn v-if="!isNew" @click="deleteUser">Delete</v-btn>
@@ -35,8 +35,7 @@ export default {
     opened: Boolean,
   },
   methods: {
-    persist() {
-      if (this.isNew) {
+    createUser() {
         api.users
             .create({
               username: this.user.username,
@@ -45,7 +44,6 @@ export default {
               roles: ["USER"],
             })
             .then(() => this.$emit("refresh"));
-      }
     },
 
     deleteUser() {
