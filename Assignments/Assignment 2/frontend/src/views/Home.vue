@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to the Bookstore Application" />
+    <img alt="Vue logo" src="../assets/logo.png"/>
+    <HelloWorld msg="Welcome to the Bookstore Application"/>
   </div>
 </template>
 

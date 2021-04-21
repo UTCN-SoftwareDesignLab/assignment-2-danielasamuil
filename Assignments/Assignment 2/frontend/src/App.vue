@@ -11,9 +11,10 @@
 
 <script>
 import TopBar from "./components/TopBar";
+
 export default {
   name: "App",
-  components: { TopBar },
+  components: {TopBar},
   data: () => ({
     //
   }),

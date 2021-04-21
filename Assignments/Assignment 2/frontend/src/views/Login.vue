@@ -10,34 +10,35 @@
             </v-card-title>
             <v-form>
               <v-text-field
-                v-if="mode === 'register'"
-                prepend-icon="email"
-                name="Email"
-                label="Email"
-                v-model="login.email"
-                validate-on-blur
+                  v-if="mode === 'register'"
+                  prepend-icon="email"
+                  name="Email"
+                  label="Email"
+                  v-model="login.email"
+                  validate-on-blur
               >
               </v-text-field>
               <v-text-field
-                prepend-icon="person"
-                name="Username"
-                label="Username"
-                v-model="login.username"
-                validate-on-blur
+                  prepend-icon="person"
+                  name="Username"
+                  label="Username"
+                  v-model="login.username"
+                  validate-on-blur
               ></v-text-field>
               <v-text-field
-                prepend-icon="lock"
-                name="Password"
-                label="Password"
-                type="password"
-                v-model="login.password"
-                validate-on-blur
+                  prepend-icon="lock"
+                  name="Password"
+                  label="Password"
+                  type="password"
+                  v-model="login.password"
+                  validate-on-blur
               ></v-text-field>
               <v-card-actions>
                 <v-container>
                   <v-layout v-if="inLoginMode" row justify-center>
                     <v-btn primary large block @click="attemptLogin"
-                      >Login</v-btn
+                    >Login
+                    </v-btn
                     >
                     <v-btn plain @click="toggleMode">
                       No account? Click to register!
@@ -46,7 +47,8 @@
 
                   <v-layout v-else row justify-center>
                     <v-btn primary large block @click="attemptRegister"
-                      >Register</v-btn
+                    >Register
+                    </v-btn
                     >
                     <v-btn plain @click="toggleMode">
                       Already registered? Click to login!
@@ -54,7 +56,7 @@
                   </v-layout>
 
                   <v-layout v-if="isLoggedIn" row justify-center>
-                    <v-btn @click="logout"> Logout </v-btn>
+                    <v-btn @click="logout"> Logout</v-btn>
                   </v-layout>
                 </v-container>
               </v-card-actions>

@@ -4,30 +4,27 @@
       Books
       <v-spacer></v-spacer>
       <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search Book"
-        single-line
-        hide-details
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search Book"
+          single-line
+          hide-details
       ></v-text-field>
       <v-btn @click="addBook">Add Book</v-btn>
-      <v-btn @click="exportCSV">CSV Report
-      </v-btn>
-      <v-btn @click="exportPDF">PDF Report
-      </v-btn>
-      <v-btn @click="sell">Sell book
-      </v-btn>
+      <v-btn @click="exportCSV">CSV Report</v-btn>
+      <v-btn @click="exportPDF">PDF Report</v-btn>
+      <v-btn @click="sell">Sell book</v-btn>
     </v-card-title>
     <v-data-table
-      :headers="headers"
-      :items="items"
-      :search="search"
-      @click:row="editBook"
+        :headers="headers"
+        :items="items"
+        :search="search"
+        @click:row="editBook"
     ></v-data-table>
     <BookDialog
-      :opened="dialogVisible"
-      :book="selectedBook"
-      @refresh="refreshList"
+        :opened="dialogVisible"
+        :book="selectedBook"
+        @refresh="refreshList"
     ></BookDialog>
   </v-card>
 </template>
@@ -38,7 +35,7 @@ import BookDialog from "../components/BookDialog";
 
 export default {
   name: "BookList",
-  components: { BookDialog },
+  components: {BookDialog},
   data() {
     return {
       items: [],
@@ -50,13 +47,17 @@ export default {
           sortable: false,
           value: "name",
         },
-        { text: "Author", value: "author"
+        {
+          text: "Author", value: "author"
         },
-        { text: "Genre", value: "genre"
+        {
+          text: "Genre", value: "genre"
         },
-        { text: "Quantity", value: "quantity"
+        {
+          text: "Quantity", value: "quantity"
         },
-        { text: "Price", value: "price"
+        {
+          text: "Price", value: "price"
         },
       ],
       dialogVisible: false,
@@ -71,13 +72,13 @@ export default {
     addBook() {
       this.dialogVisible = true;
     },
-    exportCSV(){
+    exportCSV() {
       api.books.csv();
     },
-    exportPDF(){
+    exportPDF() {
       api.books.pdf();
     },
-    sell(book){
+    sell(book) {
       this.selectedBook = book;
       this.dialogVisible = true;
     },

@@ -4,11 +4,11 @@
       Users
       <v-spacer></v-spacer>
       <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search User"
-        single-line
-        hide-details
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search User"
+          single-line
+          hide-details
       ></v-text-field>
       <v-btn @click="addUser">Add User</v-btn>
     </v-card-title>
@@ -18,7 +18,8 @@
         :items="users"
         :search="search"
         @click:row="updateUser">
-      ></v-data-table
+      >
+    </v-data-table
     >
 
     <UserDialog
@@ -48,8 +49,8 @@ export default {
           sortable: false,
           value: "name",
         },
-        { text: "Email", value: "email" },
-        { text: "Roles", value: "roles" },
+        {text: "Email", value: "email"},
+        {text: "Roles", value: "roles"},
       ],
       selectedUser: {},
       dialogVisible: false,
