@@ -45,9 +45,9 @@ public class Bootstrapper implements ApplicationListener<ApplicationReadyEvent> 
                 );
             }
             authService.register(SignupRequest.builder()
-                    .email("alex@email.com")
-                    .username("alex")
-                    .password("WooHoo1!")
+                    .email("daniela@email.com")
+                    .username("daniela")
+                    .password("SomePassword1")
                     .roles(Set.of("ADMIN"))
                     .build());
             authService.register(SignupRequest.builder()

@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.bookstore.TestCreationFactory.*;
@@ -24,7 +23,6 @@ import static com.example.bookstore.frontoffice.controller.UrlMapping.*;
 import static com.example.bookstore.frontoffice.report.ReportType.CSV;
 import static com.example.bookstore.frontoffice.report.ReportType.PDF;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -138,20 +136,18 @@ public class BookControllerTest extends BaseControllerTest {
     /*
     @Test
     void sell() throws Exception {
-        BookDTO book = BookDTO.builder()
-                .id(randomInt())
+        BookDTO bookDTO = BookDTO.builder()
                 .name(randomString())
                 .author(randomString())
                 .genre(randomString())
-                .quantity(5)
+                .quantity(4)
+                .price(2)
                 .build();
 
-        when(bookService.sell(book.getId())).thenReturn(true);
-
-        ResultActions result = performPatchWithRequestBody(BOOKS + ENTITY, book.getId());
+        ResultActions result = performSell(BOOKS+ENTITY,bookDTO.getId().toString());
         result.andExpect(status().isOk());
     }
-    */
+
     //Not working yet
     /*
     @Test
@@ -162,13 +158,12 @@ public class BookControllerTest extends BaseControllerTest {
                 .genre(randomString())
                 .build();
 
-        List<BookDTO> books = new ArrayList<>();
-        books.add(bookDTO);
+        List<BookDTO> books = TestCreationFactory.listOf(Book.class);
+        when(bookService.findByNameOrAuthorOrGenre("something")).thenReturn(books);
 
-        when(bookService.findByNameOrAuthorOrGenre("%something%")).thenReturn(books);
+        ResultActions response = mockMvc.perform(get(BOOKS));
 
-        ResultActions response = performGetWithPathVariable(BOOKS + SPECIFIC_BOOK, "%something%");
-
-        response.andExpect(status().isOk());
+        response.andExpect(status().isOk())
+                .andExpect(jsonContentToBe(books));
     } */
 }

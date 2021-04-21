@@ -8,12 +8,13 @@ import com.example.bookstore.frontoffice.user.repository.RoleRepository;
 import com.example.bookstore.frontoffice.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class AuthService {
 
@@ -22,6 +23,7 @@ public class AuthService {
     private final RoleRepository roleRepository;
 
     private final PasswordEncoder encoder;
+
 
     public boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
@@ -55,6 +57,6 @@ public class AuthService {
 
         user.setRoles(roles);
         userRepository.save(user);
-
     }
 }
+

@@ -37,7 +37,6 @@ class BookServiceIntegrationTest {
             Book book = Book.builder()
                     .name("Name " + i)
                     .author("Author" + i)
-                    .quantity(1)
                     .build();
             books.add(book);
             bookRepository.save(book);
@@ -59,7 +58,6 @@ class BookServiceIntegrationTest {
             Book book = Book.builder()
                     .name("Name " + i)
                     .author("Author" + i)
-                    .quantity(1)
                     .build();
             books.add(book);
             bookRepository.save(book);
@@ -81,7 +79,6 @@ class BookServiceIntegrationTest {
             Book book = Book.builder()
                     .name("Name " + i)
                     .author("Author" + i)
-                    .quantity(1)
                     .build();
             books.add(book);
 

@@ -27,7 +27,7 @@ public class BookController {
     }
 
     @GetMapping(SPECIFIC_BOOK)
-    public List<BookDTO> findSpecific(@PathVariable String input) {
+    public List<BookDTO> findSpecific(@RequestBody String input) {
         return bookService.findByNameOrAuthorOrGenre(input);
     }
 
@@ -56,7 +56,7 @@ public class BookController {
         reportServiceFactory.getReportService(type).export();
     }
 
-    @PatchMapping(ENTITY)
+    @PostMapping(ENTITY)
     public ResponseEntity<?> sell(@PathVariable Integer id) {
         if (bookService.sell(id))
             return ResponseEntity.ok("Sold the book");
