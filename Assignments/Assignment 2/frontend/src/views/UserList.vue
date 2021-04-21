@@ -3,13 +3,6 @@
     <v-card-title>
       Users
       <v-spacer></v-spacer>
-      <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="Search User"
-          single-line
-          hide-details
-      ></v-text-field>
       <v-btn @click="addUser">Add User</v-btn>
     </v-card-title>
 
