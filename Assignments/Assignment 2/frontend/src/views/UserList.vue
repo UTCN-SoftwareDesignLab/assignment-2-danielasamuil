@@ -40,7 +40,7 @@ export default {
           text: "Username",
           align: "start",
           sortable: false,
-          value: "name",
+          value: "username",
         },
         {text: "Email", value: "email"},
         {text: "Roles", value: "roles"},

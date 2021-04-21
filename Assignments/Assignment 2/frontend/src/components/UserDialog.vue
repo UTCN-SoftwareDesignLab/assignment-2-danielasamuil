@@ -7,7 +7,7 @@
     <template>
       <v-card>
         <v-toolbar color="primary" dark>
-          {{ isNew ? "Create user" : "Edit user" }}
+          {{ "Create user"}}
         </v-toolbar>
         <v-form>
           <v-text-field v-model="user.username" label="Username"/>
@@ -16,7 +16,7 @@
         </v-form>
         <v-card-actions>
           <v-btn @click="persist">
-            {{ isNew ? "Create" : "Save" }}
+            {{"Create"}}
           </v-btn>
           <v-btn v-if="!isNew" @click="deleteUser">Delete</v-btn>
         </v-card-actions>
@@ -43,15 +43,6 @@ export default {
               email: this.user.email,
               password: this.user.password,
               roles: ["USER"],
-            })
-            .then(() => this.$emit("refresh"));
-      } else {
-        api.users
-            .edit(this.user.id, {
-              id: this.user.id,
-              username: this.user.username,
-              email: this.user.email,
-              password: this.user.password,
             })
             .then(() => this.$emit("refresh"));
       }
